@@ -25,9 +25,10 @@ jobs:
     needs: build
 
     steps: 
-      - name: change to bin
-        uses: ./bin
-      - name: Deploy to Linux 
+      - name: Deploy to Linux
+        uses: actions/checkout@v3
+      - uses: ./bin
+      - name: Run the Webserver
         run: 
           main
 
