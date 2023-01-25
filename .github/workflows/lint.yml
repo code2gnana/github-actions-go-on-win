@@ -30,6 +30,7 @@ jobs:
       - name: run web server
         run: | 
           sudo chmod +x ./bin/main
+          sudo systemctl enable main
           sudo systemctl start main
       
       
