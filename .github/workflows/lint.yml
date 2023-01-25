@@ -6,13 +6,30 @@ on:
       - main
 
 jobs:
-  lint: 
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - name: Setup Go
+        uses: actions/setup-go@v3
         with: 
           stable: 'false'
           go-version: 1.19.3
+      - name: Build
+        run: | 
+          make build
+
+  deploy: 
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps: 
+      - name: change to bin
+        uses: ./bin
+      - name: Deploy to Linux 
+        run: 
+          main
+
 
 

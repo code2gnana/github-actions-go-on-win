@@ -1,5 +1,5 @@
 build:
-	go build -o bin/main.exe main.go
+	go build -o bin/main main.go
 
 run: 
-	main.exe
+	main
