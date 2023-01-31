@@ -1,0 +1,39 @@
+name: Deploy Go Application
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GO111MODULE: on
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: latest
+
+    - name: Build and test application
+      run: |
+        make build
+      
+
+    - name: Deploy to production
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: main
+        package: ./main.exe
+      
+      
+      
+
+
+
