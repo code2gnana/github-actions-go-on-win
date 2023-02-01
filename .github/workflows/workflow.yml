@@ -9,7 +9,7 @@ env:
   GO111MODULE: on
 
 jobs:
-  deploy:
+  build:
     runs-on: windows-latest
 
     steps:
@@ -26,7 +26,21 @@ jobs:
         get-process | ?{$_.ws -gt 100mb}
         go build -o bin/main main.go
       shell: 
-        powershell      
+        powershell
+
+  Deploy:
+    needs: build
+
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Deploy to Windows
+        uses: actions/checkout@v3
+      - name: run web server
+        run: | 
+          /bin/main.exe
+
 
       
       
