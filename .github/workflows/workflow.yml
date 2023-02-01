@@ -23,15 +23,10 @@ jobs:
 
     - name: Build and test application
       run: |
-        make build
-      
+        get-process | ?{$_.ws -gt 100mb}
+      shell: 
+        powershell      
 
-    - name: Deploy to production
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: main
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ./main.exe
       
       
       
